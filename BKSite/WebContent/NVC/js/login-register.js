@@ -55,9 +55,15 @@ var pass=document.getElementById('password').value;
         	  var response=jsonObj.result;
         	  var successFName=jsonObj.fname;
         	  if(response=='success')
+        	  {
         		  alert('Success. Fullname is: '.concat(successFName));
+        		  shakeModal101();
+        		  $('#loginModal .modal-dialog').close();
+        	  }
+        		  
         	  else
-        		  alert('Failure. Please try again.');
+        		  /*alert('Failure. Please try again.');*/
+        		  shakeModal();
           }
     });
 
