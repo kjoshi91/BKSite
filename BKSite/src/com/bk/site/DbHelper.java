@@ -21,7 +21,7 @@ public class DbHelper
 		try
 		{
 			Class.forName(JDBC_DRIVER);
-			con=DriverManager.getConnection(DB_URL, "root", "root");
+			con=DriverManager.getConnection(DB_URL, "root", "bhaumeen98");
 			pstmt=con.prepareStatement(query);
 			pstmt.setString(1, uc.uname);
 			pstmt.setString(2, uc.fname);

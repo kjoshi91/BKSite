@@ -114,21 +114,9 @@ function checkmail(){
     }
 }
 
-/*function checkpass(){
-    var m=/[^a-zA-Z0-9]+/;
-    var p=document.getElementById('Password').value;
-    if(p<8 || p>16 || m.test(p)){
-        shakeModal3();
-    }
-    else{
-        shakeModal101();
-    }
-}*/
-
 function checkpass(){
     var j=/[^a-zA-Z0-9]+/;
     var Pass=document.getElementById('Password').value;
-    alert('passwooooooooooord iiiiissss. '.concat(Pass));
     if(j.test(Pass)||Pass==null||Pass==' '||Pass.length<8||Pass.length>16){
       shakeModal3();
     }else{
@@ -169,6 +157,19 @@ function registerAjax(){
          registerEmail="";
           }
     });
+    
+    
+    alert('Registration Successful! click the OK to continue to Login page!');
+    
+    $('#loginModal .registerBox').fadeOut('fast',function(){
+        $('.loginBox').fadeIn('fast');
+        $('.register-footer').fadeOut('fast',function(){
+            $('.login-footer').fadeIn('fast');    
+        });
+        
+        $('.modal-title').html('Login!');
+    });       
+     $('.error').removeClass('alert alert-danger').html('');
 }
 
 
@@ -223,9 +224,7 @@ function shakeModal5(){
 }
 
 function shakeModal101(){
-    
-	$('#loginModal .modal-dialog').removeClass('shake')
-  $('.error').removeClass('alert alert-danger').html();
+    $('.error').removeClass('alert').html('');
 }
 
  
