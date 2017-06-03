@@ -50,15 +50,14 @@ var pass=document.getElementById('password').value;
             
           },
           success: function(jsonObj) {
-        	  console.log('Value of result:'.concat(jsonObj));
-        	  alert('Response received. Result'.concat(jsonObj));
         	  var response=jsonObj.result;
         	  var successFName=jsonObj.fname;
         	  if(response=='success')
         	  {
-        		  alert('Success. Fullname is: '.concat(successFName));
-        		  shakeModal101();
-        		  $('#loginModal .modal-dialog').close();
+        		  /* alert('Success. Fullname is: '.concat(successFName));
+        		  shakeModal101();*/
+        		  $('#loginModal .modal-dialog').hide();
+        		  $('.modal-backdrop').hide();
         	  }
         		  
         	  else
