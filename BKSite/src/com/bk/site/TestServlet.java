@@ -38,8 +38,24 @@ public class TestServlet extends HttpServlet
 			uc.printUser();
 			if(uc.action.equals("register"))
 			{
-				createUser();
-				System.out.println("User created successfully.");
+				boolean createStatus=createUser();
+				response.setContentType("application/json");
+				PrintWriter out=response.getWriter();
+				String insertResponse="";
+				if(createStatus)
+				{
+					System.out.println("User created successfully.");
+					insertResponse="{\"createResult\":\"success\"}";
+					out.print(insertResponse);
+					out.flush();
+				}
+				else
+				{
+					System.out.println("Some error occured in user creation.");
+					insertResponse="{\"createResult\":\"failure\"}";
+					out.print(insertResponse);
+					out.flush();
+				}
 			}
 			else if(uc.action.equals("login"))
 			{
@@ -68,14 +84,17 @@ public class TestServlet extends HttpServlet
 			err.printStackTrace();
 		}
 	}
-	private void createUser()
+	private boolean createUser()
 	{
 		if(uc!=null)
 		{
 			DbHelper dh=new DbHelper();
-			dh.insertUser(uc);
+			boolean insertStatus=dh.insertUser(uc);
 			uc=null;
+			return insertStatus;
 		}
+		else
+			return false;
 	}
 	private String loginUser()
 	{

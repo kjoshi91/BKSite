@@ -29,12 +29,13 @@ public class DbHelper
 			pstmt.setString(4, uc.pass);
 			pstmt.execute();
 			con.close();
+			return true;
 		}
 		catch(Exception e)
 		{
 			e.printStackTrace();
+			return false;
 		}
-		return true;
 	}
 	
 	public String fetchUser(UserClass uc)

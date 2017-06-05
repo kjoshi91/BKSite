@@ -158,8 +158,17 @@ function registerAjax(){
             
           },
           success: function(result) {
-         registerPass="";
-         registerEmail="";
+        	  registerPass="";
+        	  registerEmail="";
+        	  var response=result.createResult;
+        	  if(response=="success")
+        	  {
+        		  alert('User creation successful.');
+        	  }
+        	  else
+        	  {
+        		  alert('Some error occurred during user creation.');
+        	  }
           }
     });
     
