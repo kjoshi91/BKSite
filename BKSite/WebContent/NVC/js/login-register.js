@@ -54,37 +54,82 @@ var pass=document.getElementById('password').value;
         	  var successFName=jsonObj.fname;
         	  if(response=='success')
         	  {
-        		  /* alert('Success. Fullname is: '.concat(successFName));
-        		  shakeModal101();*/
         		  $('#loginModal .modal-dialog').hide();
         		  $('.modal-backdrop').hide();
+        		  sessionStorage.setItem("username", ""+successFName);
+        		  onLoginSuccess();
         	  }
         		  
         	  else
-        		  /*alert('Failure. Please try again.');*/
         		  shakeModal();
           }
     });
-
-	    /*$.post("../TestServlet",{"uname":"abc","pass":"def"},function(data){*/
-
-	        /* perform your task here. */
-
-	   /*  },"json");
-	
-    /*   Remove this comments when moving to server
-    $.post( "/login", function( data ) {
-            if(data == 1){
-                window.location.replace("/home");            
-            } else {
-                 shakeModal(); 
-            }
-        });
-    */
-
-/*   Simulate error message from the server   */
-    /*shakeModal();*/
 }
+
+function onLoginSuccess(){
+	  	var div= document.getElementById('loggedIn');
+	  	if (div.style.display == 'none') {
+	     div.style.display = '';
+	  	}
+	  	else {
+	     div.style.display = 'none';
+	  	}
+	  	
+	  	var div = document.getElementById('loggedOut');
+	  	if (div.style.display == '') {
+	     div.style.display = 'none';
+	  	}
+	  	else {
+	     div.style.display = '';
+	  	}
+	  	var fname=sessionStorage.getItem("username");
+	  	var welcomeName='Welcome '.concat(fname).concat('!');
+	  	document.getElementById("welcome").innerHTML = welcomeName;
+	  	document.getElementById("aboutFaq").innerHTML = "Queries & Doubts";
+	  	document.getElementById('logoutButton').style.display = 'inherit';
+}
+
+function onLogout(){
+	$("#menu-close").click();
+	var div = document.getElementById('loggedIn');
+  	if (div.style.display == '') {
+     div.style.display = 'none';
+  	}
+  	else {
+     div.style.display = '';
+  	}
+  	
+  	var div = document.getElementById('loggedOut');
+  	if (div.style.display == 'none') {
+     div.style.display = '';
+  	}
+  	else {
+     div.style.display = 'none';
+  	}
+  	document.getElementById("aboutFaq").innerHTML = "Login & About";
+  	document.getElementById('logoutButton').style.display = 'none';
+  	sessionStorage.removeItem("username");
+  	location.reload(true);
+}
+
+function checkLogin()
+{
+	var fname=sessionStorage.getItem("username");
+	console.log(fname);
+	if(fname!=null)
+	{
+		var fname=sessionStorage.getItem("username");
+	  	var welcomeName='Welcome '.concat(fname).concat('!');
+	  	document.getElementById("welcome").innerHTML = welcomeName;
+		var div = document.getElementById('loggedIn');
+		var div2 = document.getElementById('loggedOut');
+		div.style.display = '';
+		div2.style.display = 'none';
+		document.getElementById("aboutFaq").innerHTML = "Queries & Doubts";
+	  	document.getElementById('logoutButton').style.display = 'inherit';
+	}
+}
+
 
 function checkuname(){
     var z=/[^a-zA-Z0-9\!\@\#\$\^\_]+/;
@@ -107,7 +152,6 @@ function checkfullname(){
 }
 
 function checkmail(){
-    // var x = document.forms["myform"]["email"].value;
 	var Email=document.getElementById('Email').value;
     var atpos = Email.indexOf("@");
     var dotpos = Email.lastIndexOf(".");
@@ -163,27 +207,22 @@ function registerAjax(){
         	  var response=result.createResult;
         	  if(response=="success")
         	  {
-        		  alert('User creation successful.');
+        		  alert('Registration Successful! click the OK to continue to Login page!');
+        		  $('#loginModal .registerBox').fadeOut('fast',function(){
+                   $('.loginBox').fadeIn('fast');
+                      $('.register-footer').fadeOut('fast',function(){
+                          $('.login-footer').fadeIn('fast');    
+                          });
+                      $('.modal-title').html('Login!');
+                      });       
+        		  $('.error').removeClass('alert alert-danger').html('');
         	  }
         	  else
         	  {
-        		  alert('Some error occurred during user creation.');
+        		  shakeModal6();
         	  }
           }
     });
-    
-    
-    alert('Registration Successful! click the OK to continue to Login page!');
-    
-    $('#loginModal .registerBox').fadeOut('fast',function(){
-        $('.loginBox').fadeIn('fast');
-        $('.register-footer').fadeOut('fast',function(){
-            $('.login-footer').fadeIn('fast');    
-        });
-        
-        $('.modal-title').html('Login!');
-    });       
-     $('.error').removeClass('alert alert-danger').html('');
 }
 
 
@@ -231,6 +270,15 @@ function shakeModal4(){
 function shakeModal5(){
     $('#loginModal .modal-dialog').addClass('shake');
              $('.error').addClass('alert alert-danger').html("Fullname should only contain letters!");
+             $('input[type="password"]').val('');
+             setTimeout( function(){ 
+                $('#loginModal .modal-dialog').removeClass('shake'); 
+    }, 250 ); 
+}
+
+function shakeModal6(){
+    $('#loginModal .modal-dialog').addClass('shake');
+             $('.error').addClass('alert alert-danger').html("Some error occurred during Registration. Please try again!");
              $('input[type="password"]').val('');
              setTimeout( function(){ 
                 $('#loginModal .modal-dialog').removeClass('shake'); 

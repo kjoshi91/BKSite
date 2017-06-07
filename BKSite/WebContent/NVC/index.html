@@ -33,18 +33,18 @@
     <script src="js/login-register.js" type="text/javascript"></script>
     <script src="js/modernizr.js"></script>
     
-    <!--  <script type="text/javascript">
+    <!--<script type="text/javascript">
     window.onload = function(){alert("For the best viewing experience, Please load this page in google chrome or latest firefox browsers as few features wont work on browsers like internet explorer and edge");}
     </script>-->
     <script src="js/index.js"></script> 
 </head>
 
-<body>
+<body onload="checkLogin()">
 
     <!-- Navigation -->
     <a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle"><i class="fa fa-bars"></i></a>
     <nav id="sidebar-wrapper">
-        <ul class="sidebar-nav">
+        <ul class="sidebar-nav" id="sideMenu">
             <a id="menu-close" href="#" class="btn btn-dark btn-lg pull-right toggle"><i class="fa fa-times"></i></a>
             <li class="sidebar-brand">
                 <a style="color: white" href="#top" onclick=$("#menu-close").click();>Menu</a>
@@ -53,7 +53,7 @@
                 <a style="color: white" href="#top" onclick=$("#menu-close").click();>Home</a>
             </li>
             <li>
-                <a style="color: white" href="#about" onclick=$("#menu-close").click();>Login &amp; About</a>
+                <a style="color: white" href="#about" id="aboutFaq" onclick=$("#menu-close").click();>Login &amp; About</a>
             </li>
             <li>
                 <a style="color: white" href="#blog" onclick=$("#menu-close").click();>Blogs &amp; Posts</a>
@@ -63,6 +63,9 @@
             </li>
             <li>
                 <a style="color: white" href="#contact" onclick=$("#menu-close").click();>Contact &amp; Location</a>
+            </li>
+            <li style="color: white; text-align: center; cursor: pointer;">
+                <a style="color: white; display:none;" id="logoutButton" onclick="onLogout();">Logout</a>
             </li>
         </ul>
     </nav>
@@ -82,12 +85,19 @@
     	<!-- Call to Action -->
     <aside class="call-to-action bg-primary" style="background-color: #C99157;margin-top: -70px;">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
+            <div class="row" style="position: relative;">
+                <div class="col-lg-12 text-center" id="loggedOut">
                     <h3>Login to recieve newsletters and updates!</h3>
                     <hr class="small">
                     <a class="btn btn-lg btn-light" data-toggle="modal" href="javascript:void(0)" onclick="openLoginModal();">Login!</a>
                     <a data-toggle="modal" href="javascript:void(0)" onclick="openRegisterModal();" class="btn btn-lg btn-dark">Sign UP!</a>
+                </div>
+                <div class="col-lg-12_1 text-center" style="display:none;" id="loggedIn">
+                    <h3 id="welcome"></h3>
+                    <h3>Got any queries? we got you covered!</h3>
+                    <hr class="small">
+                    <a class="btn btn-lg btn-light" data-toggle="modal" href="javascript:void(0)" onclick="alert('Opps! This feature is currently under development :(')">Upload documents!</a>
+                    <a data-toggle="modal" href="mailto:sangeitacdave@networkvisaconsultants.com?Subject=Query" class="btn btn-lg btn-dark">Queries? Mail Us!</a>
                 </div>
             </div>
         </div>
@@ -122,7 +132,7 @@
                                 <input id="Email" class="form-control" type="text" placeholder="Email" name="email" onblur="checkmail()">
                                 <input id="Password" class="form-control" type="password" placeholder="Password" name="Password" onblur="checkpass()">
                                 <input id="Password_confirmation" class="form-control" type="password" placeholder="Repeat Password" name="password_confirmation" onblur="matchPass()">
-                                <a href="#loginModal" style="text-decoration: none; "><input class="btn btn-default btn-register" type="button" value="Create account" name="commit" onclick="registerAjax()"></a>
+                                <a style="text-decoration: none; "><input class="btn btn-default btn-register" type="button" value="Create account" name="commit" onclick="registerAjax()"></a>
                                 </form>
                                 </div>
                             </div>
@@ -161,10 +171,6 @@
     <section id="blog" class="blog">
         <section style="background-color: #C99157;height: 20%;margin-top: -25px;width: 100%;text-align: center;color: white;"><h2><br>Blogs and Posts!</h2>
         <hr class="small"></section>
-        <!--<script language="JavaScript" src="http://feed2js.org//feed2js.php?src=http%3A%2F%2Fbhaumeen.blogspot.com%2Ffeeds%2Fposts%2Fdefault%3Falt%3Drss&num=1&au=y&date=y&targ=xxxx&utf=y&html=a"  charset="UTF-8" type="text/javascript" style="height:80%;width:80%;"></script>
-        <noscript>
-        <a href="http://feed2js.org//feed2js.php?src=http%3A%2F%2Fbhaumeen.blogspot.com%2Ffeeds%2Fposts%2Fdefault%3Falt%3Drss&num=1&au=y&date=y&targ=xxxx&utf=y&html=y">View RSS feed</a>
-        </noscript>-->
         <script language="JavaScript" src="http://feed2js.org//feed2js.php?src=http%3A%2F%2Fbhaumeen.blogspot.in%2Ffeeds%2Fposts%2Fdefault%3Falt%3Drss&chan=y&num=5&desc=60&au=y&date=y&targ=xxxx&utf=y"  charset="UTF-8" type="text/javascript"></script>
         <noscript>
         <a href="http://feed2js.org//feed2js.php?src=http%3A%2F%2Fbhaumeen.blogspot.in%2Ffeeds%2Fposts%2Fdefault%3Falt%3Drss&chan=y&num=5&desc=60&au=y&date=y&targ=xxxx&utf=y&html=y">View RSS feed</a>
@@ -223,7 +229,7 @@
                         </li>
                     </ul>
                     <hr class="small" style=" border-top: 1px solid #432411;max-width: 100px;">
-                    <p class="text-muted">Copyright &copy; Your Website 2017</p>
+                    <p class="text-muted">Copyright &copy; networkvisaconsultants.com 2017</p>
                 </div>
             </div>
         </div>

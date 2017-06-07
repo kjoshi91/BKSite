@@ -21,7 +21,7 @@ public class DbHelper
 		try
 		{
 			Class.forName(JDBC_DRIVER);
-			con=DriverManager.getConnection(DB_URL, "root", "root");
+			con=DriverManager.getConnection(DB_URL, "nvcuser", "nvcuser");
 			pstmt=con.prepareStatement(query);
 			pstmt.setString(1, uc.uname);
 			pstmt.setString(2, uc.fname);
@@ -29,13 +29,12 @@ public class DbHelper
 			pstmt.setString(4, uc.pass);
 			pstmt.execute();
 			con.close();
-			return true;
 		}
 		catch(Exception e)
 		{
 			e.printStackTrace();
-			return false;
 		}
+		return true;
 	}
 	
 	public String fetchUser(UserClass uc)
@@ -45,7 +44,7 @@ public class DbHelper
 		try
 		{
 			Class.forName(JDBC_DRIVER);
-			con=DriverManager.getConnection(DB_URL, "root", "root");
+			con=DriverManager.getConnection(DB_URL, "root", "bhaumeen98");
 			Statement stmt=con.createStatement();
 			ResultSet rs=stmt.executeQuery(query);
 			if(rs!=null)
