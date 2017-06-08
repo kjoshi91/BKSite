@@ -17,7 +17,7 @@
     		
     <link href="css/style.css" rel="stylesheet">
     
-
+	<script src="js/custom-file-input.js"></script>
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
@@ -81,7 +81,7 @@
     </header>
 
     <!-- About -->
-    <section id="about" class="about">
+    <section id="about" class="about" style="overflow-y:hidden;">
     	<!-- Call to Action -->
     <aside class="call-to-action bg-primary" style="background-color: #C99157;margin-top: -70px;">
         <div class="container">
@@ -96,8 +96,8 @@
                     <h3 id="welcome"></h3>
                     <h3>Got any queries? we got you covered!</h3>
                     <hr class="small">
-                    <a class="btn btn-lg btn-light" data-toggle="modal" href="javascript:void(0)" onclick="alert('Opps! This feature is currently under development :(')">Upload documents!</a>
-                    <a data-toggle="modal" href="mailto:sangeitacdave@networkvisaconsultants.com?Subject=Query" class="btn btn-lg btn-dark">Queries? Mail Us!</a>
+                    <a class="btn btn-lg btn-light" data-toggle="modal" href="javascript:void(0)" data-target="#myModal">Upload documents!</a>
+                    <a data-toggle="modal" href="mailto:sangeitacdave@networkvisaconsultants.com?Subject=Query" class="btn btn-lg btn-dark">Queries ? E-Mail Us!</a>
                 </div>
             </div>
         </div>
@@ -153,10 +153,120 @@
               </div>
           </div>
     </div></center>
+    
+    
+    
+    <center><div class="modal fade login" id="myModal">
+              <div class="modal-dialog login animated">
+                  <div class="modal-content">
+                     <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Queries?</h4>
+                        <h4>Write a query and upload a document if necessary!</h4>
+                    </div>
+                    <div class="modal-body">  
+                        <div class="box">
+                             <div class="content">
+                                
+                                <div id="errorDiv" class="error"></div>
+                                <div class="form loginBox">
+                                    <form method="post" action="" accept-charset="UTF-8">
+                                    <!--  <input id="query" class="form-control" type="text" placeholder="query" name="query" style="max-height:50%; height:50%;">-->
+                                    <style>
+                                    textarea {
+  								 	resize: none;
+									}
+                                    </style>
+                                    <textarea class="form-control" name="Text1" cols="40" rows="8" placeholder="type your query here ....!"></textarea>
+                                    <div class="box">
+									<input type="file" name="file-1[]" id="file-1" class="inputfile inputfile-1" data-multiple-caption="{count} files selected" multiple />
+									<label for="file-1"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17"><path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"/></svg> <span>Choose a file&hellip;</span></label>
+									</div>
+									
+									<script type="text/javascript">
+							
+								'use strict';
+
+								;( function ( document, window, index )
+								{
+									var inputs = document.querySelectorAll( '.inputfile' );
+									Array.prototype.forEach.call( inputs, function( input )
+									{
+										var label	 = input.nextElementSibling,
+											labelVal = label.innerHTML;
+
+										input.addEventListener( 'change', function( e )
+										{
+											var fileName = '';
+											if( this.files && this.files.length > 1 )
+												fileName = ( this.getAttribute( 'data-multiple-caption' ) || '' ).replace( '{count}', this.files.length );
+											else
+												fileName = e.target.value.split( '\\' ).pop();
+
+											if( fileName )
+												label.querySelector( 'span' ).innerHTML = fileName;
+											else
+												label.innerHTML = labelVal;
+										});
+
+										// Firefox bug fix
+										input.addEventListener( 'focus', function(){ input.classList.add( 'has-focus' ); });
+										input.addEventListener( 'blur', function(){ input.classList.remove( 'has-focus' ); });
+									});
+								}( document, window, 0 ));
+									</script>
+									<input class="btn btn-default btn-login" type="button" value="Submit" onclick="alert('Opps! This feature is currently under development :(')">
+                                    </form>
+                                </div>
+                             </div>
+                        </div>
+                    </div>       
+                  </div>
+              </div>
+          </div>
+    </center>
+    <!--  <script src="http://code.jquery.com/jquery.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+        <script>
+            $('#form').submit(function(e) {
+
+                var form = $(this);
+                var formdata = false;
+                if(window.FormData){
+                    formdata = new FormData(form[0]);
+                }
+
+                var formAction = form.attr('action');
+
+                $.ajax({
+                    type        : 'POST',
+                    url         : 'post.php',
+                    cache       : false,
+                    data        : formdata ? formdata : form.serialize(),
+                    contentType : false,
+                    processData : false,
+
+                    success: function(response) {
+                        if(response != 'error') {
+                            //$('#messages').addClass('alert alert-success').text(response);
+                            // OP requested to close the modal
+                            $('#myModal').modal('hide');
+                        } else {
+                            $('#messages').addClass('alert alert-danger').text(response);
+                        }
+                    }
+                });
+                e.preventDefault();
+            });
+        </script>-->
+        
+    
+    
+    
        
         <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
+            <div class="row" >
+                <div class="col-lg-12 text-center" >
                     <h2>About Network Visa Consultant</h2><hr class="small" style="border-top: 1px solid #000;">
                     <p class="lead">Network Visa Consultants (NVC), under the proprietary concern of Ms. Sangeita C. Dave having 25 years of experience is one of the best visa service provider for temporary and permanent visas for countries all around the world. Our speciality services include Visa Consultations and Processing for temporary and Permanent visa categories, Holiday Packages, Flights, travel insurance, Hotels and Forex. NVC consultants and personnels strive hard to give hassle free services to clients in getting their visas. Our consultants give attention to crucial information related to your case while consulting for visas so that there is no room for any error. NVC has a highly qualified, experienced, well trained and dedicated team of immigration advisors, and consultants committed to provide an effective and efficient assistance to companies and individuals with entire visa consultations,NVC’s goal is to achieve the optimum of being best visa company in India and to be recognised and nominated by the travellers as best place in India for visas and travel.</p>
                 </div>
@@ -168,7 +278,12 @@
 
     
     <!--Blog-->
-    <section id="blog" class="blog">
+    <style>
+    #blog::-webkit-scrollbar { 
+    display: none; 
+	}
+    </style>
+    <section id="blog" class="blog" style="overflow-y:scroll;">
         <section style="background-color: #C99157;height: 20%;margin-top: -25px;width: 100%;text-align: center;color: white;"><h2><br>Blogs and Posts!</h2>
         <hr class="small"></section>
         <script language="JavaScript" src="http://feed2js.org//feed2js.php?src=http%3A%2F%2Fbhaumeen.blogspot.in%2Ffeeds%2Fposts%2Fdefault%3Falt%3Drss&chan=y&num=5&desc=60&au=y&date=y&targ=xxxx&utf=y"  charset="UTF-8" type="text/javascript"></script>

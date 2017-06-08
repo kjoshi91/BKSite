@@ -130,6 +130,31 @@ function checkLogin()
 	}
 }
 
+function showLoginForm(){
+    $('#loginModal1 .registerBox').fadeOut('fast',function(){
+        $('.loginBox').fadeIn('fast');
+        $('.register-footer').fadeOut('fast',function(){
+            $('.login-footer').fadeIn('fast');    
+        });
+        
+        $('.modal-title').html('Login!');
+    });       
+     $('.error').removeClass('alert alert-danger').html(''); 
+}
+
+function openLoginModal1(){
+    showLoginForm();
+    setTimeout(function(){
+        $('#loginModal1').modal('show');    
+    }, 230);
+    
+}
+
+function upload() {
+    var x = document.createElement("INPUT");
+    x.setAttribute("type", "file");
+    document.body.appendChild(x);
+}
 
 function checkuname(){
     var z=/[^a-zA-Z0-9\!\@\#\$\^\_]+/;

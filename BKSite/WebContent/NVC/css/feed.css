@@ -1,4 +1,4 @@
-body{margin:0;padding:0;background-color:#fff9a8;}
+body{margin:0;padding:0;background-color:#fff9a8;overflow-y:scroll;}
 img {border:0px;}
 .feed-container{font-size:100%;width:80%;height:80%;}
 .feed-container .header{margin:0px;padding:5px 5px 5px 5px;font-size:14px;border-bottom:1px solid #CCC;}
