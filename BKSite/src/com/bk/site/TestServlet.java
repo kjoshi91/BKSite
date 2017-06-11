@@ -1,9 +1,13 @@
 package com.bk.site;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.util.Properties;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -16,12 +20,21 @@ import com.google.gson.Gson;
 public class TestServlet extends HttpServlet
 {
 	UserClass uc;
+	Properties prop;
+	InputStream input=null;
+	String logLocation;
 	public void doGet(HttpServletRequest request,HttpServletResponse response) throws ServletException
 	{
 		
 	}
 	public void doPost(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException
 	{
+		File propertiesFile=new File(System.getenv("TOMCAT_PATH")+File.separator+"lib"+File.separator+"site.properties");
+		System.out.println("Properties file: "+propertiesFile.toString());
+		prop=new Properties();
+		input=new FileInputStream(propertiesFile);
+		prop.load(input);
+		logLocation=prop.getProperty("LOGS");
 		System.out.println("Servlet called");
 		BufferedReader br=new BufferedReader(new InputStreamReader(request.getInputStream()));
 		String objParam="";

@@ -44,7 +44,7 @@ var pass=document.getElementById('password').value;
     jQuery.ajax({
           url: '../TestServlet',
           type: 'POST',
-          data: '{uname:"'.concat(email).concat('",pass:"').concat(pass).concat('",email:"",action:"login"}'),
+          data: '{uname:"'.concat('",pass:"').concat(pass).concat('",email:"').concat(email).concat('",action:"login"}'),
           dataType: 'json',
           beforeSend: function(x) {
             
@@ -87,6 +87,7 @@ function onLoginSuccess(){
 	  	document.getElementById("welcome").innerHTML = welcomeName;
 	  	document.getElementById("aboutFaq").innerHTML = "Queries & Doubts";
 	  	document.getElementById('logoutButton').style.display = 'inherit';
+	  	shakeModal101();
 }
 
 function onLogout(){
