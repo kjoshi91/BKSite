@@ -11,6 +11,7 @@ body {
     width: 100%;
     height: 100%;
     background-color: #FFF9A8;
+   /* background: url(../img/bg.jpg) no-repeat center center scroll;*/
 }
 
 body {
@@ -28,6 +29,11 @@ body {
     padding: 0;
     font-size: 4.5em;
     font-weight: 700;
+}
+
+.wrap{
+	max-width:30%;
+	margin-left:35%;
 }
 
 /* Custom Button Styles */
@@ -61,7 +67,7 @@ body {
 /* Custom Horizontal Rule */
 
 hr.small {
-    max-width: 100px;
+    max-width: 130px;
 }
 
 /* Side Menu */
@@ -167,16 +173,17 @@ hr.small {
 
 .about {
     padding: 50px 0;
+    height: 100%;
+    overflow-y:scroll;
 }
 
 /* Services */
 
-.login{
-    padding: 50px 0;
-}
+
 
 .service-item {
     margin-bottom: 30px;
+    overflow-y:scroll;
 }
 
 /* Callout */
@@ -196,7 +203,9 @@ hr.small {
 /* Portfolio */
 
 .portfolio {
-    padding: 50px 0;
+    padding: 0px 0;
+    height: 100%;
+	
 }
 
 .portfolio-item {
@@ -211,6 +220,25 @@ hr.small {
     opacity: 0.8;
 }
 
+/* blog */
+
+.blog {
+    padding: 0px 0;
+    height: 101%;
+	overflow-y:scroll;
+}
+
+.blog-item {
+    margin-bottom: 30px;
+}
+
+.img-blog {
+    margin: 0 auto;
+}
+
+.img-blog:hover {
+    opacity: 0.8;
+}
 /* Call to Action */
 
 .call-to-action {
@@ -222,9 +250,12 @@ hr.small {
 }
 
 /* Map */
+    
 
 .map {
     height: 500px;
+    padding-top: 0;
+    margin-top: 110px;
 }
 
 @media(max-width:768px) {
@@ -249,3 +280,94 @@ footer {
   bottom: 5px;
   right: 5px;
 }
+
+.inputfile-1 + label {
+    color: #f1e5e6;
+    background-color: #d3394c;
+}
+
+.inputfile-1:focus + label,
+.inputfile-1.has-focus + label,
+.inputfile-1 + label:hover {
+    background-color: #722040;
+}
+
+.js .inputfile {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+.inputfile + label {
+    max-width: 100%;
+    
+    /*font-size: 1.25rem;
+    /* 20px */
+    font-weight: 700;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer;
+    
+    overflow: hidden;
+    /*padding: 0.625rem 1.25rem;
+    /* 10px 20px */
+    
+   
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.42857143;
+  text-align: center;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+      touch-action: manipulation;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background-color: #d3394c;
+    
+    border-width: 0;
+    color: #f1e5e6;
+    display: block;
+    margin: 0 auto;
+    padding: 15px 50px;
+    text-transform: uppercase;
+    width: 100%;
+    margin-bottom:10px;
+    margin-top:5px;
+	max-width:55%;
+}
+
+.no-js .inputfile + label {
+    display: none;
+}
+
+.inputfile:focus + label,
+.inputfile.has-focus + label {
+    outline: 1px dotted #000;
+    outline: -webkit-focus-ring-color auto 5px;
+}
+
+.inputfile + label * {
+    /* pointer-events: none; */
+    /* in case of FastClick lib use */
+}
+
+.inputfile + label svg {
+    width: 1em;
+    height: 1em;
+    vertical-align: middle;
+    fill: currentColor;
+    margin-top: -0.25em;
+    /* 4px */
+    margin-right: 0.25em;
+    /* 4px */
+}
+
+
