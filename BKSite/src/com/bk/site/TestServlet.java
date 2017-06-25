@@ -79,7 +79,7 @@ public class TestServlet extends HttpServlet
 				if(loginRes!=null)
 				{
 					System.out.println("Login successful.");
-					jsonResponse="{\"result\":\"success\",\"fname\":\""+loginRes+"\"}";
+					jsonResponse="{\"result\":\"success\",\"fname\":\""+loginRes+"}";
 					out.print(jsonResponse);
 					out.flush();
 				}

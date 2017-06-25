@@ -62,6 +62,7 @@ public class DbHelper
 	{
 		String query="select * from user_table where user_email='"+uc.email+"'";
 		String uname="",email="",passwd="",fname="";
+		int isAdmin=0;
 		try
 		{
 			Class.forName(JDBC_DRIVER);
@@ -75,11 +76,12 @@ public class DbHelper
 				fname=rs.getString("user_fname");
 				email=rs.getString("user_email");
 				passwd=rs.getString("user_password");
+				isAdmin=rs.getInt("user_isAdmin");
 			}
 			if(uc.email.equals(email) && uc.pass.equals(passwd))
 			{
 				System.out.println("It's a match!\nFull Name: "+fname);
-				return fname;
+				return fname+"\",\"isAdmin\":"+isAdmin;
 			}
 			else
 				return null;
