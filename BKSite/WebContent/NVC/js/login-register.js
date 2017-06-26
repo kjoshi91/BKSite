@@ -57,7 +57,7 @@ var pass=document.getElementById('password').value;
         	  {
         		  $('#loginModal .modal-dialog').hide();
         		  $('.modal-backdrop').hide();
-        		  sessionStorage.setItem("username", ""+successFName);
+        		  localStorage.setItem("username", ""+successFName);
         		  onLoginSuccess();
         		  //alert("Is admin: "+isAdmin);
         		  if(isAdmin==1)
@@ -66,6 +66,7 @@ var pass=document.getElementById('password').value;
         			  var port=window.location.port;
         			  var URL="http://"+hostname+":"+port+"/BK_Site/NVC/adminPortal.html";
         			  var openedTab=window.open(URL);
+        			  localStorage.setItem("isAdmin",isAdmin);
         		  }
         		  window.location.reload(true);
         	  }
@@ -119,7 +120,8 @@ function onLogout(){
   	}
   	document.getElementById("aboutFaq").innerHTML = "Login & About";
   	document.getElementById('logoutButton').style.display = 'none';
-  	sessionStorage.removeItem("username");
+  	localStorage.removeItem("username");
+  	localStorage.removeItem("isAdmin");
 }
 
 function checkLogin()

@@ -19,5 +19,24 @@ function performAjaxSubmit() {
         if (this.status == 200) {
            alert(this.responseText);
         }
-    };                    
+    };      
 }   
+
+function checkUserLoggedIn()
+{
+	var uname=localStorage.getItem("username");
+	var isAdmin=localStorage.getItem("isAdmin");
+	if(uname!=null)
+	{
+		if(isAdmin!=1)
+		{
+			alert("You are not administrator!");
+			window.close();
+		}
+	}
+	else
+	{
+		alert("You are not logged in!");
+		window.close();
+	}
+}
