@@ -68,7 +68,6 @@ var pass=document.getElementById('password').value;
         			  var openedTab=window.open(URL);
         			  localStorage.setItem("isAdmin",isAdmin);
         		  }
-        		  window.location.reload(true);
         	  }
         		  
         	  else
@@ -93,7 +92,7 @@ function onLoginSuccess(){
 	  	else {
 	     div.style.display = '';
 	  	}
-	  	var fname=sessionStorage.getItem("username");
+	  	var fname=localStorage.getItem("username");
 	  	var welcomeName='Welcome '.concat(fname).concat('!');
 	  	document.getElementById("welcome").innerHTML = welcomeName;
 	  	document.getElementById("aboutFaq").innerHTML = "Queries & Doubts";
@@ -126,11 +125,11 @@ function onLogout(){
 
 function checkLogin()
 {
-	var fname=sessionStorage.getItem("username");
+	var fname=localStorage.getItem("username");
 	console.log(fname);
 	if(fname!=null)
 	{
-		var fname=sessionStorage.getItem("username");
+		var fname=localStorage.getItem("username");
 	  	var welcomeName='Welcome '.concat(fname).concat('!');
 	  	document.getElementById("welcome").innerHTML = welcomeName;
 		var div = document.getElementById('loggedIn');

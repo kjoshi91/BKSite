@@ -13,7 +13,7 @@ function performAjaxSubmit() {
     formdata.append("sampleFile1", sampleFile1);
     formdata.append("sampleFile2", sampleFile2);
     var xhr = new XMLHttpRequest();       
-    xhr.open("POST","/UploadFile", true);
+    xhr.open("POST","../UploadFile", true);
     xhr.send(formdata);
     xhr.onload = function(e) {
         if (this.status == 200) {
@@ -24,6 +24,7 @@ function performAjaxSubmit() {
 
 function checkUserLoggedIn()
 {
+	
 	var uname=localStorage.getItem("username");
 	var isAdmin=localStorage.getItem("isAdmin");
 	if(uname!=null)
@@ -31,12 +32,12 @@ function checkUserLoggedIn()
 		if(isAdmin!=1)
 		{
 			alert("You are not administrator!");
-			window.close();
+			window.location.href="about:blank";
 		}
 	}
 	else
 	{
 		alert("You are not logged in!");
-		window.close();
+		window.location.href="about:blank";
 	}
 }

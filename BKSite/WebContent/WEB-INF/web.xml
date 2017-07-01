@@ -18,4 +18,13 @@
 		<servlet-name>TestServlet</servlet-name>
 		<url-pattern>/TestServlet</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>UploadFile</servlet-name>
+		<servlet-class>com.bk.site.UploadFile</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UploadFile</servlet-name>
+		<url-pattern>/UploadFile</url-pattern>
+	</servlet-mapping>
 </web-app>
