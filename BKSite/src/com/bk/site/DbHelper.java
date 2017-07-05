@@ -92,4 +92,57 @@ public class DbHelper
 			return null;
 		}
 	}
+
+	public boolean insertText(TextWrapper tw)
+	{
+		String query="insert into scroll_details (scroll_text,text_visible) values (?,?)";
+		String deleQuery="delete from scroll_details";
+		try
+		{
+			Class.forName(JDBC_DRIVER);
+			con=DriverManager.getConnection(DB_URL, username, password);
+			pstmt=con.prepareStatement(deleQuery);
+			pstmt.executeUpdate();
+			pstmt=con.prepareStatement(query);
+			pstmt.setString(1, tw.text);
+			if(tw.isVisible)
+				pstmt.setInt(2,1);
+			else
+				pstmt.setInt(2,0);
+			pstmt.execute();
+			con.close();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+	public boolean fetchTextVisible()
+	{
+		String query="select text_visible from scroll_details";
+		boolean isVisible=false;
+		try
+		{
+			Class.forName(JDBC_DRIVER);
+			con=DriverManager.getConnection(DB_URL, username, password);
+			Statement stmt=con.createStatement();
+			ResultSet rs=stmt.executeQuery(query);
+			if(rs!=null)
+			{
+				while(rs.next())
+				{
+					if(rs.getInt("text_visible")==1)
+						isVisible=true;
+					else
+						isVisible=false;
+				}
+			}
+		} catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+		return isVisible;
+	}
 }
