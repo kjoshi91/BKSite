@@ -3,6 +3,7 @@ package com.bk.site;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -52,11 +53,40 @@ public class AdminServlet extends HttpServlet {
 			Gson g=new Gson();
 			TextWrapper tw=g.fromJson(objParam, TextWrapper.class);
 			System.out.println(tw.toString());
-			boolean status=insertTextStatus(tw);
+			if(tw.action.equals("send"))
+			{
+				boolean status=insertTextStatus(tw);
+			}
+			else if(tw.action.equals("retrive"))
+			{
+				TextWrapper twRetrieve=fetchTextStatus();
+				System.out.println("Fetched details: "+twRetrieve.toString());
+				response.setContentType("application/json");
+				PrintWriter out=response.getWriter();
+				String jsonResponse="";
+				if(twRetrieve!=null)
+				{
+					jsonResponse="{\"text\":\""+twRetrieve.text+"\",\"isVisible\":\""+twRetrieve.isVisible+"\"}";
+					out.print(jsonResponse);
+					out.flush();
+				}
+			}
 		} catch (Exception e)
 		{
 			e.printStackTrace();
 		}
+	}
+
+	private TextWrapper fetchTextStatus() 
+	{
+		DbHelper dh=new DbHelper();
+		TextWrapper twRetreived;
+		boolean isTextVisible=dh.fetchTextVisible();
+		String text="";
+		if(isTextVisible)
+			text=dh.fetchText();
+		twRetreived=new TextWrapper(text, isTextVisible, null);
+		return twRetreived;
 	}
 
 	private boolean insertTextStatus(TextWrapper tw)

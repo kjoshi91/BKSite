@@ -71,24 +71,25 @@ public class UploadFile extends HttpServlet
 					String contentType=fi.getContentType();
 					boolean isInMemory=fi.isInMemory();
 					long sizeInBytes=fi.getSize();
-					if( fileName.lastIndexOf("\\") >= 0 )
+					/*if( fileName.lastIndexOf("\\") >= 0 )
 					{
 		                  file = new File( filePath + fileName.substring( fileName.lastIndexOf("\\"))) ;
 		            }
 					else
 					{
 		                  file = new File( filePath + fileName.substring(fileName.lastIndexOf("\\")+1)) ;
-		            }
-					System.out.println("File name: "+file.getName());
-					fi.write(file);
+		            }*/
+					System.out.println("File name: "+fi.getName());
+					//fi.write(file);
 					byte[] fileByte=fi.get();
+					
 					//File outputFi=new File(filePath+File.separator+fileName);
 					File outputFi=new File(filePath+File.separator+count+".jpg");
 					System.out.println(outputFi.getName());
 					FileOutputStream fos=new FileOutputStream(outputFi);
-					FileInputStream fis=new FileInputStream(file);
-					fis.read(fileByte);
-					fis.close();
+//					FileInputStream fis=new FileInputStream(file);
+					/*fis.read(fileByte);
+					fis.close();*/
 					fos.write(fileByte);
 					fos.flush();
 					fos.close();

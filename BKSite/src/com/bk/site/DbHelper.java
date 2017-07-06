@@ -145,4 +145,28 @@ public class DbHelper
 		}
 		return isVisible;
 	}
+
+	public String fetchText() 
+	{
+		String query="select scroll_text from scroll_details";
+		String text="";
+		try
+		{
+			Class.forName(JDBC_DRIVER);
+			con=DriverManager.getConnection(DB_URL, username, password);
+			Statement stmt=con.createStatement();
+			ResultSet rs=stmt.executeQuery(query);
+			if(rs!=null)
+			{
+				while(rs.next())
+				{
+					text=rs.getString("scroll_text");	
+				}
+			}
+		} catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+		return text;
+	}
 }
