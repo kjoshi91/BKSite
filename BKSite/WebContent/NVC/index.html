@@ -39,25 +39,7 @@
     retreiveText();
     function retreiveText()
     {
-    	jQuery.ajax({
-            url: '../AdminServlet',
-            type: 'POST',
-            data: '{text:"",isVisible:"",action:"retrive"}',
-            dataType: 'json',
-            beforeSend: function(x) {
-              
-            },
-            success: function(jsonObj) {
-            	var text=jsonObj.text;
-            	var isVisible=jsonObj.isVisible;
-            	if(isVisible=="true"){
-            		document.getElementById('myCarousel').style.display= ' ';
-            		document.getElementById('scrollText').innerHTML=text;
-            	}else{
-            		document.getElementById('myCarousel').style.display='none';
-            	}
-            }
-      });
+    	
     }
     	
     </script>
