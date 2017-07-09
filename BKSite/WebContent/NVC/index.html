@@ -35,6 +35,32 @@
     window.onload = function(){alert("For the best viewing experience, Please load this page in google chrome or latest firefox browsers as few features wont work on browsers like internet explorer and edge");}
     </script>-->
     <script src="js/index.js"></script> 
+    <script>
+    retreiveText();
+    function retreiveText()
+    {
+    	jQuery.ajax({
+            url: '../AdminServlet',
+            type: 'POST',
+            data: '{text:"",isVisible:"",action:"retrive"}',
+            dataType: 'json',
+            beforeSend: function(x) {
+              
+            },
+            success: function(jsonObj) {
+            	var text=jsonObj.text;
+            	var isVisible=jsonObj.isVisible;
+            	if(isVisible=="true"){
+            		document.getElementById('myCarousel').style.display= ' ';
+            		document.getElementById('scrollText').innerHTML=text;
+            	}else{
+            		document.getElementById('myCarousel').style.display='none';
+            	}
+            }
+      });
+    }
+    	
+    </script>
 </head>
 
 <body onload="checkLogin()">
@@ -74,7 +100,7 @@
             <h1>&nbsp;Network Visa Consultants</h1>
             <h3>Expand your horizon!</h3>
             <center>
-            <div id="myCarousel" class="carousel slide" data-ride="carousel" style="max-width:40%;">
+            <div id="myCarousel" class="carousel slide" data-ride="carousel" style="max-width:40%;display:none;">
     				<!-- Wrapper for slides -->
     				<div class="carousel-inner" role="listbox">
 					<div class="item active">
@@ -92,7 +118,7 @@
       				<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
        				</a>
        				<div class='marquee' style="max-width:90%;background-color:black;color:white;">
-       				<marquee>we are available at mumbai in our branch office akj ehkrvb rskunkvsorljn lrsknvrwiljknubwljniolnkrngiroelnelinl</marquee>
+       				<marquee id="scrollText"></marquee>
        				</div>
        				<!-- <div class="text-block" style="">Mama always said life was like a box of chocolates. You never know what you’re gonna get.</div> -->
        		</div>

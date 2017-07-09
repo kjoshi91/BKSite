@@ -138,6 +138,28 @@ function checkLogin()
 		div2.style.display = 'none';
 		document.getElementById("aboutFaq").innerHTML = "Queries & Doubts";
 	  	document.getElementById('logoutButton').style.display = 'inherit';
+	  	
+	  	jQuery.ajax({
+            url: '../AdminServlet',
+            type: 'POST',
+            data: '{text:"",isVisible:"",action:"retrive"}',
+            dataType: 'json',
+            beforeSend: function(x) {
+              
+            },
+            success: function(jsonObj) {
+            	var text=jsonObj.text;
+            	var isVisible=jsonObj.isVisible;
+            	if(isVisible=='true'){
+            		document.getElementById('myCarousel').style.display= '';
+            		document.getElementById('scrollText').innerHTML=text;
+            		console.log("Executed");
+            		
+            	}else{
+            		document.getElementById('myCarousel').style.display='none';
+            	}
+            }
+      });
 	}
 }
 
