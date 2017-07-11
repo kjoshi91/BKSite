@@ -22,7 +22,7 @@ public class UploadFile extends HttpServlet
 {
 	
 	private boolean isMultipart;
-	private String filePath="D:\\BK site\\uploaded";
+	private String filePath="D:\\BKSite\\uploaded";
 	private int maxFileSize = 500 * 1024;
 	private int maxMemSize = 4 * 1024;
 	private File file ;
@@ -52,7 +52,7 @@ public class UploadFile extends HttpServlet
 		
 		DiskFileItemFactory factory=new DiskFileItemFactory();
 		factory.setSizeThreshold(maxMemSize);
-		factory.setRepository(new File("D:\\BK site\\temp"));
+		factory.setRepository(new File("D:\\BKSite\\temp"));
 		ServletFileUpload upload=new ServletFileUpload(factory);
 		upload.setSizeMax(maxFileSize);
 		try

@@ -4,6 +4,10 @@
     background: transparent;  /* optional: just make scrollbar invisible */
 }
 
+#scrollText{
+	background-color:#C99157;
+}
+
 html,
 body {
     width: 100%;
@@ -159,6 +163,8 @@ hr.small {
     -moz-background-size: cover;
     background-size: cover;
     -o-background-size: cover;
+    
+    color:#ffa033;
 }
 
 /* About */
